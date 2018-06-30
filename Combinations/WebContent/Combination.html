@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="jquery-3.0.0.js"></script>
+
+
+
+
+</head>
+<body>
+<script>
+var calculateCombination = function(){
+	var words = $('#letters').val();
+	var arr = words.split('');
+	var myNode = document.getElementById("list");
+	while (myNode.firstChild) {
+	    myNode.removeChild(myNode.firstChild);
+	}
+	
+	possibleStrings(words.length, words, "");
+	
+	
+	
+	
+};
+
+
+var possibleStrings = function( maxLength, alphabet, curr) {
+	
+    // If the current string has reached it's maximum length
+    if(curr.length == maxLength) {
+    	var node = document.createElement("LI");
+        var textnode = document.createTextNode(curr);
+        node.appendChild(textnode);
+        document.getElementById("list").appendChild(node);
+
+    // Else add each letter from the alphabet to new strings and process these new strings again
+    } else {
+        for(var i = 0; i < alphabet.length; i++) {
+            var oldCurr = curr;
+            curr += alphabet[i];
+            possibleStrings(maxLength,alphabet,curr);
+            curr = oldCurr;
+        }
+    }
+    
+};
+
+</script>
+
+
+
+Please enter letters only without spaces: <input id="letters" type="text"/>
+<button id="name" onclick="calculateCombination()">Click Me</button>
+<br/>
+
+<div><ol id="list">
+
+</ol></div>
+</body>
+</html>
